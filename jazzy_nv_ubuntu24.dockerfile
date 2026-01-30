@@ -12,18 +12,6 @@ RUN apt-get update && apt-get install -y \
     gnupg \
     lsb-release
 
-# Install VSCode
-RUN apt-get install wget gpg -y && \
-    wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg && \
-    sudo install -D -o root -g root -m 644 microsoft.gpg /usr/share/keyrings/microsoft.gpg && \
-    rm -f microsoft.gpg
-
-COPY vscode.sources /etc/apt/sources.list.d/vscode.sources
-
-RUN apt install apt-transport-https -y && \
-    apt update && \
-    apt install code -y # or code-insiders
-
 # Install ROS2 Jazzy Jalisco
 RUN locale-gen en_US en_US.UTF-8
 ENV LANG=en_US.UTF-8 \
